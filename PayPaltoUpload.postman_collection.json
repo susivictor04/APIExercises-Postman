@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "20bd5844-5b2c-4a9f-bcd5-3eaff2c5bda0",
+		"name": "PayPaltoUpload",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SBCreateToken",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "EAxhYKPpp-bG7epfyUIpw-BiJcFBcj3jo4ml5axVWt27tDxe4ebNBTsPJBXtqcbz680NEpVVeWpnqRzx",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "AVxDKHMBf_qnYsxVb9eqSnu9Ql_D9cCvvPJ_R1p-lYoNEWGappCQMtQFawHIaP4VEXHilBE7L8qj1Zku",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.sandbox.paypal.com/v1/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sandbox",
+						"paypal",
+						"com"
+					],
+					"path": [
+						"v1",
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateProductSB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81d6caf6-23cf-442d-81e2-8cc842bf17dc",
+						"exec": [
+							"var response =pm.response.json();\r",
+							"var product= response.id\r",
+							"console.log(\"Product ID created :\" + product);\r",
+							"pm.environment.set(\"ProductID\", product);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "A21AAEO1gvSsSH9CKE3gWeC_TLV1LR-L8BN6kK-1HAQY_MwxHvU5nCnQr1gc2Zhv2Y-PuMi6G3px-8uxJvp-MrFfjzwG_nJSg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"IIT Crash course Materials\",\r\n  \"description\": \"IIT Study Materials\",\r\n  \"type\": \"PHYSICAL\",\r\n  \"category\": \"BOOKS\",\r\n  \"image_url\": \"https://lh3.googleusercontent.com/JanJUvZGqmg-PSgS6qX8HXZcnl9Yme-632vHPNIR-4MQUpx1aqOrrjsZjeXSLgsABeH3xA=s95\",\r\n  \"home_url\": \"https://lh3.googleusercontent.com/\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.sandbox.paypal.com/v1/catalogs/products",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sandbox",
+						"paypal",
+						"com"
+					],
+					"path": [
+						"v1",
+						"catalogs",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductSB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c219b43c-e9d2-48c4-aa7f-505ccf7d06cc",
+						"exec": [
+							"//Verify the status code\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"type\");\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"category\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "A21AAFHiPLgvneo1hiTuuysanpv-VVe_scz58F9U-5PBGhsWxUooVpq1hRdKwc6Ubx1LZ4fpwKz3v5W60QmS9yLgrfeifj_4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.sandbox.paypal.com/v1/catalogs/products/{{ProductID}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sandbox",
+						"paypal",
+						"com"
+					],
+					"path": [
+						"v1",
+						"catalogs",
+						"products",
+						"{{ProductID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "366c6b62-a13e-4571-8c48-ec27b4a2ae61",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3f602df3-9e9e-436b-ba32-82aee8634802",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "04ee72ba-2dc1-41cc-88bf-96fe448f7267",
+			"key": "ProductID",
+			"value": "PROD-38T46743PY211215J",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
