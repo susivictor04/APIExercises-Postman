@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "75ff6c72-527f-4510-b15a-1d2fa70ddb44",
+		"name": "BestBuy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getStoreNameforaProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.bestbuy.com/v1/products/6341359/stores.json?postalCode=95125&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bestbuy",
+						"com"
+					],
+					"path": [
+						"v1",
+						"products",
+						"6341359",
+						"stores.json"
+					],
+					"query": [
+						{
+							"key": "postalCode",
+							"value": "95125"
+						},
+						{
+							"key": "apiKey",
+							"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindCanonPriceRange",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.bestbuy.com/v1/products(manufacturer=canon&(salePrice>=1000&salePrice<=1500))?format=json&show=sku,name,salePrice",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bestbuy",
+						"com"
+					],
+					"path": [
+						"v1",
+						"products(manufacturer=canon&(salePrice>=1000&salePrice<=1500))"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "show",
+							"value": "sku,name,salePrice"
+						},
+						{
+							"key": "maxResult",
+							"value": "50",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegularAndSellingPriceofiPhone11",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.bestbuy.com/v1/products(manufacturer=apple&search=iPhone 11 Pro 64GB)?format=json&show=name,regularPrice,salePrice&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bestbuy",
+						"com"
+					],
+					"path": [
+						"v1",
+						"products(manufacturer=apple&search=iPhone 11 Pro 64GB)"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "show",
+							"value": "name,regularPrice,salePrice"
+						},
+						{
+							"key": "apiKey",
+							"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StorePickUpRegion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.bestbuy.com/v1/products(manufacturer=apple&search=iPhone 11 64GB&inStorePickup=true)+stores(region=RI)?format=json&show=sku,name,stores.storeId,stores.name,stores.address&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bestbuy",
+						"com"
+					],
+					"path": [
+						"v1",
+						"products(manufacturer=apple&search=iPhone 11 64GB&inStorePickup=true)+stores(region=RI)"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "show",
+							"value": "sku,name,stores.storeId,stores.name,stores.address"
+						},
+						{
+							"key": "apiKey",
+							"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
