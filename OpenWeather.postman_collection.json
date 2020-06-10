@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "6c7831ce-8be9-437f-bf11-565208d428b1",
+		"name": "OpenWeather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetWeatherCity",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b92c3f15-2c81-4a3c-8bc8-64509944af90",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c820608c-0ec4-4030-b8b5-c5fd6f4402e3",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"var cityweather = response.weather[0].main;\r",
+							"\r",
+							"if ((cityweather.toLowerCase().includes(\"rain\")) || (cityweather.toLowerCase().includes(\"haze\")))\r",
+							"{\r",
+							" console.log(\" The weather condition of the city \" + response.name +\" is \" + cityweather + \" and description is :\" + response.weather[0].description);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?q={{name}},IN&appid=c397236a177654c953b206cf4304b40f",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{name}},IN"
+						},
+						{
+							"key": "appid",
+							"value": "c397236a177654c953b206cf4304b40f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetWeatherMajorCitiesIndia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bfc34b87-1810-4a43-98a4-97b3fd09f6a5",
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?q=mumbai,IN&appid=c397236a177654c953b206cf4304b40f",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "mumbai,IN"
+						},
+						{
+							"key": "appid",
+							"value": "c397236a177654c953b206cf4304b40f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetVolumeofRainfallMumbai",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39d58e08-bb76-48fe-8b03-db6fd939f406",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://history.openweathermap.org/data/2.5/history/city?lat=19.01&lon=72.85&type=hour&start=1591293978&end=1591553178&appid=c397236a177654c953b206cf4304b40f",
+					"protocol": "http",
+					"host": [
+						"history",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"history",
+						"city"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "19.01"
+						},
+						{
+							"key": "lon",
+							"value": "72.85"
+						},
+						{
+							"key": "type",
+							"value": "hour"
+						},
+						{
+							"key": "start",
+							"value": "1591293978"
+						},
+						{
+							"key": "end",
+							"value": "1591553178"
+						},
+						{
+							"key": "appid",
+							"value": "c397236a177654c953b206cf4304b40f"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
