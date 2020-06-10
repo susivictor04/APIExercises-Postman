@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "87b42f56-b08c-40af-98e7-8261d60a577d",
+		"name": "Covid-19API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetTop5Countries-New Cases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0596ed81-ea23-430e-8a00-4b98113a5464",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"var total=response.length;\r",
+							"console.log(\"Total :\" + total);\r",
+							"var map = new Map();\r",
+							"for (var i =1; i<= total - 1 ;  i++){\r",
+							"      let country= response[i][\"Country_text\"];\r",
+							"      let eachNewCase= parseInt(response[1]['New Cases_text'].split(',').join(\"\").replace(\"+\",\"\"));\r",
+							"        \r",
+							"     map.set(eachNewCase, country);\r",
+							"} \r",
+							"console.log(map);\r",
+							"\r",
+							"var mapv= new Map([...map].sort(function(a, b){\r",
+							"   if(a[0] <b[0]) {\r",
+							"      return 1;\r",
+							"   }\r",
+							"   else {\r",
+							"      return -1;\r",
+							"   }\r",
+							" }).slice(0,5))\r",
+							"\r",
+							" console.log(mapv);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid-19.dataflowkit.com/v1",
+					"protocol": "https",
+					"host": [
+						"covid-19",
+						"dataflowkit",
+						"com"
+					],
+					"path": [
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTop5Countries - Lowest Death",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "35ae6daa-9c59-4d5f-9867-fdabcb221943",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"\r",
+							"var total=response.length;\r",
+							"var newDeath = [];\r",
+							"var deathMap = new Map();\r",
+							"for (var i =1 ; i< total -1 ; i++){\r",
+							"    if (response[i]['New Deaths_text'] !=\"\") {\r",
+							"      newDeath[i] =parseInt((response[i]['New Deaths_text']).split(',').join(\"\").replace(\"+\",\"\")) \r",
+							"      deathMap.set(newDeath[i], response[i].Country_text);\r",
+							"    }\r",
+							"}\r",
+							"console.log(deathMap);\r",
+							"\r",
+							"var deathSorted= new Map([...deathMap].sort(function(a, b){\r",
+							"   if(a[0] > b[0]) {\r",
+							"      return 1;\r",
+							"   }\r",
+							"   else {\r",
+							"      return -1;\r",
+							"   }\r",
+							" }).slice(0,5))\r",
+							"\r",
+							" console.log(deathSorted);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid-19.dataflowkit.com/v1",
+					"protocol": "https",
+					"host": [
+						"covid-19",
+						"dataflowkit",
+						"com"
+					],
+					"path": [
+						"v1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
