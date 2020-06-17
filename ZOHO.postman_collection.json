@@ -1,0 +1,430 @@
+{
+	"info": {
+		"_postman_id": "2aa762ba-fea7-4c5e-992e-4d6ecdb4d236",
+		"name": "ZOHO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateCustomer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c25fb393-21e2-458c-ac07-577533e98a87",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"var custid = response.customer.customer_id;\r",
+							"console.log(\"Customer Id created : \" + custid);\r",
+							"pm.environment.set(\"CustomeridEnv\", custid);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Zoho-oauthtoken 1000.b2a4b08d7f03206c76c8a1d34d9a4f6b.d737bfe6e0dea591639487f815215deb",
+						"type": "text"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"value": "716955563",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"display_name\": \"John Smith\",\r\n    \"salutation\": \"Mrs.\",\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Smith\",\r\n    \"email\": \"jsmithd@gmail.com\",\r\n   \r\n\r\n    \"company_name\": \"WALLMART\",\r\n    \"phone\": 234672232,\r\n    \"mobile\": 938237475,\r\n    \"department\": \"StoreDepartment\",\r\n    \"designation\": \"Manager\",\r\n    \"website\": \"www.walmart.com\",\r\n    \"billing_address\": {\r\n        \"attention\": \"Steve cooper\",\r\n        \"street\": \"Michael Street\",\r\n        \"city\": \"San jose\",\r\n        \"state\": \"CA\",\r\n        \"zip\": 92612,\r\n        \r\n        \"fax\": 4527389\r\n    },\r\n    \"shipping_address\": {\r\n        \"attention\": \"Second\",\r\n        \"street\": \"Second Bay Street\",\r\n        \"city\": \"Chennai\",\r\n        \"state\": \"TN\",\r\n        \"zip\": 610206,\r\n        \"fax\": 4527389\r\n    },\r\n    \"payment_terms\": 5,\r\n    \"payment_terms_label\": \"Due on receipt\",\r\n    \"currency_code\": \"USD\",\r\n    \"ach_supported\": true,\r\n    \"twitter\": \"Wallmart\",\r\n    \"facebook\": \"Wallmart\",\r\n    \"skype\": \"Wallmart\",\r\n    \"notes\": \"Wallmart\",\r\n    \"is_portal_enabled\": true,\r\n    \r\n    \"gst_treatment\": \"business_gst\"\r\n  \r\n}"
+				},
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccessTokenZoho",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.zoho.com/oauth/v2/token?code=1000.433912b3f21062307a92d2eeb91c27f3.644de0652b945ba99957719ae0937c00&client_id=1000.1D6FSYRDLWNRRB899TA4XLA84NLC7H&redirect_uri=https://www.getpostman.com/oauth2/callback&grant_type=authorization_code&scope=ZohoSubscriptions.fullaccess.all&client_secret=4b4c282aec78495c4ed351c773521e5b7725b7cf40",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "1000.433912b3f21062307a92d2eeb91c27f3.644de0652b945ba99957719ae0937c00"
+						},
+						{
+							"key": "client_id",
+							"value": "1000.1D6FSYRDLWNRRB899TA4XLA84NLC7H"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.getpostman.com/oauth2/callback"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code"
+						},
+						{
+							"key": "scope",
+							"value": "ZohoSubscriptions.fullaccess.all"
+						},
+						{
+							"key": "client_secret",
+							"value": "4b4c282aec78495c4ed351c773521e5b7725b7cf40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9be2be86-d841-4f55-be48-080efa9371d1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Zoho-oauthtoken 1000.b2a4b08d7f03206c76c8a1d34d9a4f6b.d737bfe6e0dea591639487f815215deb",
+						"type": "text"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"value": "716955563",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "oauthscope",
+						"value": "ZohoSubscriptions.customers.UPDATE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"display_name\": \"John Smith\",\r\n    \"salutation\": \"Mrs.\",\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Smith\",\r\n    \"email\": \"jsmithd@gmail.com\",\r\n   \r\n\r\n    \"company_name\": \"TESCOS\",\r\n    \"phone\": 234672232,\r\n    \"mobile\": 938237475,\r\n    \"department\": \"StoreDepartment\",\r\n    \"designation\": \"Manager\",\r\n    \"website\": \"www.walmart.com\",\r\n    \"billing_address\": {\r\n        \"attention\": \"Steve cooper\",\r\n        \"street\": \"Michael Street\",\r\n        \"city\": \"San jose\",\r\n        \"state\": \"CA\",\r\n        \"zip\": 92612,\r\n        \r\n        \"fax\": 4527389\r\n    },\r\n    \"shipping_address\": {\r\n        \"attention\": \"UpdatedSecond\",\r\n        \"street\": \"Updated Marsh Street\",\r\n        \"city\": \"Washington\",\r\n        \"state\": \"DC\",\r\n        \"zip\": 345672,\r\n        \"fax\": 345673\r\n    },\r\n    \"payment_terms\": 5,\r\n    \"payment_terms_label\": \"Due on receipt\",\r\n    \"currency_code\": \"USD\",\r\n    \"ach_supported\": true,\r\n    \"twitter\": \"Wallmart\",\r\n    \"facebook\": \"Wallmart\",\r\n    \"skype\": \"Wallmart\",\r\n    \"notes\": \"Wallmart\",\r\n    \"is_portal_enabled\": true,\r\n    \r\n    \"gst_treatment\": \"business_gst\"\r\n  \r\n}"
+				},
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers/{{CustomeridEnv}}",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"{{CustomeridEnv}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CustomerList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d8f81861-4a1d-46db-ad15-626cd82b574a",
+						"exec": [
+							"var response =pm.response.json();\r",
+							"var custid= response.customers[0].customer_id;\r",
+							"console.log(\"Customer Id created :\" + custid);\r",
+							"console.log(\"CUstomer id env variable value :\" + pm.environment.get(\"CustomeridEnv\"));\r",
+							"if (custid===pm.environment.get(\"CustomeridEnv\")){\r",
+							"    console.log(\"Created customer exists in the customer list\");\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Zoho-oauthtoken 1000.b2a4b08d7f03206c76c8a1d34d9a4f6b.d737bfe6e0dea591639487f815215deb",
+						"type": "text"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"value": "716955563",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "oauthscope",
+						"value": "ZohoSubscriptions.customers.READ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccessTokenUsingRefreshtoken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.zoho.com/oauth/v2/token?client_id=1000.1D6FSYRDLWNRRB899TA4XLA84NLC7H&client_secret=4b4c282aec78495c4ed351c773521e5b7725b7cf40&grant_type=refresh_token&refresh_token=1000.0a4efa5975885bcae723b5e3bb2ed333.433a1282ea3d5b5bd026bf51f7ab8030",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "1000.1D6FSYRDLWNRRB899TA4XLA84NLC7H"
+						},
+						{
+							"key": "client_secret",
+							"value": "4b4c282aec78495c4ed351c773521e5b7725b7cf40"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token"
+						},
+						{
+							"key": "refresh_token",
+							"value": "1000.0a4efa5975885bcae723b5e3bb2ed333.433a1282ea3d5b5bd026bf51f7ab8030"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37fa5fe7-4f3d-4edd-bd3e-fce807ad6983",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"var msg = response.message;\r",
+							"\r",
+							"if (msg.includes('deleted')){\r",
+							"    console.log(\" The customer has been deleted \");\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Zoho-oauthtoken 1000.b2a4b08d7f03206c76c8a1d34d9a4f6b.d737bfe6e0dea591639487f815215deb",
+						"type": "text"
+					},
+					{
+						"key": "X-com-zoho-subscriptions-organizationid",
+						"value": "716955563",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "oauthscope",
+						"value": " ZohoSubscriptions.customers.DELETE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://subscriptions.zoho.com/api/v1/customers/{{CustomeridEnv}}",
+					"protocol": "https",
+					"host": [
+						"subscriptions",
+						"zoho",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"{{CustomeridEnv}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "1000.35afa2d191206d02896fdf8de781a559.63a5f9965791f6db2940d472ac65149e",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "866c256a-7f0f-46eb-9562-e8221fe1c8fc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6a854bf8-e645-443f-b0d7-d7baf7bc771a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "cf1f8145-2ab8-492a-89fd-eea48faa42d0",
+			"key": "CustomeridEnv",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
