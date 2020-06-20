@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "3ffacbd6-529a-4a5f-9694-995614c8c682",
+		"name": "UTIBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserLogin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usernameone\",\r\n    \"password\": \"Pass@123\"\r\n}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/users/login",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccountDetails",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "gzip, deflate, br",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "LJ1k5g03IUQirhkwcr50HydRmLsXViRyxNSewEARIMnhdF6xQ9jl32aD6ZpAvAph",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/accounts?filter[where][userId]=5eee0d92e29f950044ba2f75\n",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "filter[where][userId]",
+							"value": "5eee0d92e29f950044ba2f75\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccountRegister",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19a59e6a-48e2-4674-befd-fecfd6e5969b",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"var userid = response.id;\r",
+							"var emailID = response.email;\r",
+							"console.log(\"User ID : \" + userid);\r",
+							"console.log(\"Email ID : \" + emailID);\r",
+							"pm.environment.set(\"emailaddr\", emailID);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip, deflate, br",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"fnametwo\",\r\n    \"title\": \"mr\",\r\n    \"middleName\": \"mnametwo\",\r\n    \"lastName\": \"lnametwo\",\r\n    \"gender\": \"male\",\r\n    \"employmentStatus\": \"Part-time\",\r\n    \"age\": \"10/12/30\",\r\n    \"maritalStatus\": \"Married\",\r\n    \"username\": \"usernameeight\",\r\n    \"email\": \"sample118@gmail.com\",\r\n    \"password\": \"pass@123\",\r\n    \"type\": \"customer\"\r\n}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/users/",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ApplyLoan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c3781ea-9e1c-49e4-9f21-9b8894c66c13",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"var quoteID = response.quoteid;\r",
+							"console.log (\" Loan Quote ID :\" + quoteID);\r",
+							"pm.environment.set(\"quote\", quoteID);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip, deflate, br",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{emailaddr}}\",\r\n    \"amount\": 10000,\r\n    \"term\": 3,\r\n    \"income\": 5000,\r\n    \"age\": 30\r\n}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/quotes/newquote",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"quotes",
+						"newquote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VerifyLoanDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d9b47c3-0ac7-4afa-a5c1-a9f968ca28d0",
+						"exec": [
+							"var response = pm.response.json();\r",
+							"console.log(\" Customer Income : \" + response.income);\r",
+							"console.log(\" Loan Amount : \" + response.amount);\r",
+							"console.log(\" Loan Term : \" + response.term);\r",
+							"console.log(\" Loan Rate : \" + response.rate);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/quotes/{{quote}}",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"quotes",
+						"{{quote}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0ca962e8-08e7-49a8-aef2-178e437fee75",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "89234097-036d-4db6-80e3-a6a7e5d5d18f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6c8e3f8a-f7c9-4940-bd1f-8491784cce05",
+			"key": "emailaddr",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "51003200-e933-44f4-aacc-7fecf4e9b894",
+			"key": "quote",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
